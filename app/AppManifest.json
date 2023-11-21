@@ -1,6 +1,6 @@
 {
     "manifestVersion": "v3",
-    "name": "SampleApp",
+    "name": "seatadjuster",
     "interfaces": [
         {
             "type": "vehicle-signal-interface",
@@ -9,8 +9,20 @@
                 "datapoints": {
                     "required": [
                         {
+                            "path": "Vehicle.Cabin.Seat.Row1.Pos1.Position",
+                            "access": "write"
+                        },
+                        {
+                            "path": "Vehicle.Exterior.AirTemperature",
+                            "access": "read"
+                        },
+                        {
                             "path": "Vehicle.Speed",
                             "access": "read"
+                        },
+                        {
+                            "path": "Vehicle.Cabin.HVAC.Station.Row1.Left.Temperature",
+                            "access": "write"
                         }
                     ]
                 }
@@ -20,11 +32,14 @@
             "type": "pubsub",
             "config": {
                 "reads": [
-                    "sampleapp/getSpeed"
+                    "seatadjuster/setPosition/request",
+                    "seatadjuster/setTemperature/request"
                 ],
                 "writes": [
-                    "sampleapp/getSpeed/response",
-                    "sampleapp/currentSpeed"
+                    "seatadjuster/currentPosition",
+                    "seatadjuster/setPosition/response",
+                    "seatadjuster/currentTemperature",
+                    "seatadjuster/setTemperature/response"
                 ]
             }
         }
